@@ -6,22 +6,45 @@ const PORT = 3000;
 
 const friends = [
   {
-    id: 0,
+    id: 1,
     name: "nor-ikram",
   },
   {
-    id: 1,
+    id: 2,
     name: "nor-hakimin",
   },
   {
-    id: 2,
+    id: 3,
     name: "nor-aiman",
   },
 ];
 
+//Create own middleware ~
+app.use((req, res, next) => {
+  const startDate = Date.now();
+  next();
+  const endDate = Date.now() - startDate;
+  console.log(`${req.method} ${req.baseUrl}${req.url} ${endDate}ms`);
+});
+
+// express.json is features from xpress v4.
+app.use(express.json());
+
+app.post("/friends", (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).json({ error: "Missing Friend name" });
+  }
+  const newFriend = {
+    name: req.body.name,
+    id: friends.length + 1,
+  };
+  friends.push(newFriend);
+  res.json(newFriend);
+});
+
 app.get("/", (req, res) => {
   res.send({
-    id: 1,
+    id: 0,
     name: "nor-ikram",
   });
 });
