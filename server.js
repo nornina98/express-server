@@ -1,8 +1,7 @@
 const express = require("express");
 
-const friendsController = require("./controllers/friends.controller");
-
-const messagesController = require("./controllers/messages.controller");
+const friendsRouter = require("./routes/friends.route");
+const messagesRouter = require("./routes/messages.route");
 
 const app = express();
 
@@ -23,16 +22,11 @@ app.get("/", (req, res) => {
   res.send(`Hello This Main Page`);
 });
 
-// Make it more clean code by pass only 2 parameter and the req, res create under controller!
-app.get("/messages", messagesController.getMessages);
+// messages root routes url
+app.use("/messages", messagesRouter);
 
-app.post("/messages", messagesController.postMessages);
-
-app.get("/friends", friendsController.getFriends);
-
-app.get("/friends/:FriendId", friendsController.getFriend);
-
-app.post("/friends", friendsController.postFriend);
+// friends root routes url
+app.use("/friends", friendsRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening from port ${PORT}...`);
