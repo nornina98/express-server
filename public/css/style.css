@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* This ensures that the container takes the full height of the viewport */
+  flex-direction: column;
+}
+
+h1 {
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.5;
+  text-align: center;
+  margin: 20px; /* Adjust the margin as needed */
+}
+
+p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  margin: 20px; /* Adjust the margin as needed */
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* This centers the image within its container */
+}

@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 
 const friendsRouter = require("./routes/friends.route");
 const messagesRouter = require("./routes/messages.route");
@@ -15,19 +16,23 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.baseUrl}${req.url} ${endDate}ms`);
 });
 
-// express.json is features from xpress v4.
+// This middleware takes a directory path as an argument and serves any files in that directory at their respective URL paths
+app.use("/home", express.static(path.join(__dirname, "public")));
+
+// Middleware to parse JSON in the request body
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send(`Hello This Main Page`);
 });
 
-// messages root routes url
+// Messages root routes url
 app.use("/messages", messagesRouter);
 
-// friends root routes url
+// Friends root routes url
 app.use("/friends", friendsRouter);
 
+// Start the server by setting port 3000
 app.listen(PORT, () => {
-  console.log(`Listening from port ${PORT}...`);
+  console.log(`Server is listening on port ${PORT}...`);
 });

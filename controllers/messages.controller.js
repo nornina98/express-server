@@ -1,9 +1,8 @@
+// The "path" module provides utility functions for working with file and directory paths, across different operating systems.
+const path = require("path");
+
 function getMessages(req, res) {
-  res.send(
-    `<ul>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
-    </ul>`
-  );
+  res.sendFile(path.join(__dirname, "..", "public", "images", "NodeJs.png"));
 }
 
 function postMessages(req, res) {
