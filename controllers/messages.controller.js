@@ -1,8 +1,12 @@
-// The "path" module provides utility functions for working with file and directory paths, across different operating systems.
 const path = require("path");
 
 function getMessages(req, res) {
-  res.sendFile(path.join(__dirname, "..", "public", "images", "NodeJs.png"));
+  res.render("messages", {
+    title: "Express with Handlebars",
+    paragraph:
+      "This is URL /messages and the messages was send from messages controller regardless messages.hbs files :)",
+  });
+  // res.sendFile(path.join(__dirname, "..", "public", "images", "NodeJs.png"));
 }
 
 function postMessages(req, res) {
