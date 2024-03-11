@@ -1,4 +1,6 @@
 const express = require("express");
+
+// The "path" module provides utility functions for working with file and directory paths, across different operating systems.
 const path = require("path");
 
 const friendsRouter = require("./routes/friends.route");
@@ -7,6 +9,18 @@ const messagesRouter = require("./routes/messages.route");
 const app = express();
 
 const PORT = 3000;
+
+// Set up Handlebars as the view engine
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
+
+// Define a route to render a Handlebars view - work as react JSX
+app.get("/", (req, res) => {
+  res.render("index", {
+    title: "Express with Handlebars",
+    caption: "Node JS & Express Framework!",
+  });
+});
 
 //Create own middleware ~
 app.use((req, res, next) => {
@@ -21,10 +35,6 @@ app.use("/home", express.static(path.join(__dirname, "public")));
 
 // Middleware to parse JSON in the request body
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send(`Hello This Main Page`);
-});
 
 // Messages root routes url
 app.use("/messages", messagesRouter);
